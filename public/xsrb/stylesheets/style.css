@@ -1,0 +1,369 @@
+@charset "UTF-8";
+/* line 14, ../sass/style.scss */
+body {
+  background-image: url("../img/cont-bg-i.png");
+  background-size: 100% auto;
+  background-repeat: none;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  font-size: 12px;
+  font-family: "微软雅黑";
+}
+
+/*顶部工具条*/
+/* line 26, ../sass/style.scss */
+.lf-top-toolC {
+  background-color: #efefef;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 10px;
+}
+
+/* line 32, ../sass/style.scss */
+.lf-query-data {
+  width: 70px;
+}
+
+/* line 35, ../sass/style.scss */
+.lf-btn-query {
+  width: 60px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  color: #fff;
+  float: right;
+  background: #eb5b5a;
+  margin: 12px 10px auto 5px;
+  text-decoration: none;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  color: #fff;
+}
+/* line 18, ../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+.lf-btn-query:visited {
+  color: yellow;
+}
+/* line 21, ../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+.lf-btn-query:focus {
+  color: #d8d8d8;
+}
+/* line 24, ../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+.lf-btn-query:hover {
+  color: #efefef;
+}
+/* line 27, ../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_link-colors.scss */
+.lf-btn-query:active {
+  color: #fff;
+}
+
+/*列表内容*/
+/* line 49, ../sass/style.scss */
+.lf-page-content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-bottom: 40px;
+  overflow: auto;
+}
+
+/* line 54, ../sass/style.scss */
+.lf-page-content.lf-page-content-l {
+  top: 50px;
+}
+
+/* line 57, ../sass/style.scss */
+.lf-page-footer {
+  width: 100%;
+  height: 30px;
+  bottom: 5px;
+  position: absolute;
+  background-image: url("../img/cont-ft-bg-i.png");
+  background-size: auto 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/*新闻列表 */
+/* line 68, ../sass/style.scss */
+.lf-zl-newItem-Cont {
+  padding: 10px;
+  height: 50px;
+  border-top: 1px solid #d5d6d1;
+}
+
+/* line 73, ../sass/style.scss */
+.lf-zl-newItem-Cont:active {
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+
+/* line 77, ../sass/style.scss */
+.lf-zl-newItem-titleBtn {
+  width: 20px;
+  float: right;
+  height: 100%;
+  background-image: url("../img/left-info-i.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+}
+
+/* line 86, ../sass/style.scss */
+.lf-zl-newItem-titleCont {
+  width: 80%;
+  float: left;
+  margin-bottom: 10px;
+}
+
+/* line 92, ../sass/style.scss */
+.lf-zl-newItem-titleCont-1 {
+  display: inline-block;
+  width: 70%;
+}
+
+/* line 96, ../sass/style.scss */
+.lf-zl-newItem-title, .lf-zl-newItem-descript, .lf-zl-newMenuItem-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* line 104, ../sass/style.scss */
+.lf-zl-newItem-title {
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* line 110, ../sass/style.scss */
+.lf-zl-newItem-descript {
+  max-height: 30px;
+  overflow: hidden;
+  font-size: 10px;
+  line-height: 14px;
+  text-overflow: ellipsis;
+}
+
+/* line 117, ../sass/style.scss */
+.lf-zl-newItem-showTime {
+  font-size: 10px;
+}
+
+/*详细页*/
+/* line 123, ../sass/style.scss */
+.lf-detail-cont {
+  margin: 20px 10px;
+  overflow: hidden;
+  border: 1px solid black;
+}
+/* line 6, ../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_borders.scss */
+.lf-detail-cont thead th {
+  border-bottom: 1px solid black;
+}
+/* line 9, ../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_borders.scss */
+.lf-detail-cont tfoot th, .lf-detail-cont tfoot td {
+  border-top: 1px solid black;
+}
+/* line 12, ../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_borders.scss */
+.lf-detail-cont th:first-child {
+  border-right: 1px solid black;
+}
+/* line 16, ../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_borders.scss */
+.lf-detail-cont th, .lf-detail-cont td {
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  border-left-width: 0;
+  border-top-width: 0;
+}
+/* line 22, ../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_borders.scss */
+.lf-detail-cont th:last-child, .lf-detail-cont td:last-child {
+  border-right-width: 0;
+}
+/* line 28, ../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_borders.scss */
+.lf-detail-cont th.last, .lf-detail-cont td.last {
+  border-right-width: 0;
+}
+/* line 33, ../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_borders.scss */
+.lf-detail-cont tbody tr:last-child th, .lf-detail-cont tbody tr:last-child td, .lf-detail-cont tfoot tr:last-child th, .lf-detail-cont tfoot tr:last-child td {
+  border-bottom-width: 0;
+}
+/* line 37, ../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_borders.scss */
+.lf-detail-cont tbody tr.last th, .lf-detail-cont tbody tr.last td, .lf-detail-cont tfoot tr.last th, .lf-detail-cont tfoot tr.last td {
+  border-bottom-width: 0;
+}
+
+/* line 129, ../sass/style.scss */
+.lf-detail-cont table {
+  width: 100%;
+}
+
+/* line 132, ../sass/style.scss */
+.lf-detail-cont td {
+  text-align: center;
+  padding: 5px;
+  /*white-space: nowrap;*/
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+/* line 137, ../sass/style.scss */
+.lf-detail-t1 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* line 141, ../sass/style.scss */
+.lf-detail-t2, .lf-detail-t3 {
+  font-weight: bold;
+}
+
+/* line 145, ../sass/style.scss */
+.lf-detail-t2 {
+  background: #fcd5b4;
+}
+
+/* line 148, ../sass/style.scss */
+.lf-detail-t3 {
+  background: #58d6e4;
+}
+
+/* line 151, ../sass/style.scss */
+.lf-detail-info {
+  color: #989898;
+  display: block;
+  max-width: 60px;
+  margin: auto;
+  white-space: pre;
+  white-space: pre-wrap;
+  white-space: pre-line;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -hp-pre-wrap;
+  word-wrap: break-word;
+}
+
+/* line 161, ../sass/style.scss */
+#wrapper {
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  bottom: 40px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* line 171, ../sass/style.scss */
+#scroller {
+  position: absolute;
+  z-index: 1;
+  -webkit-tap-highlight-color: transparent;
+  width: 100%;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  -o-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+/**
+ *
+ * Pull down styles
+ *
+ */
+/* line 200, ../sass/style.scss */
+#pullDown, #pullUp {
+  background: #fff;
+  height: 40px;
+  line-height: 40px;
+  padding: 5px 10px;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+  font-size: 14px;
+  color: #888;
+}
+
+/* line 211, ../sass/style.scss */
+#pullDown .pullDownIcon, #pullUp .pullUpIcon {
+  display: block;
+  float: left;
+  width: 40px;
+  height: 40px;
+  background: url(pull-icon@2x.png) 0 0 no-repeat;
+  -webkit-background-size: 40px 80px;
+  background-size: 40px 80px;
+  -webkit-transition-property: -webkit-transform;
+  -webkit-transition-duration: 250ms;
+}
+
+/* line 219, ../sass/style.scss */
+#pullDown .pullDownIcon {
+  -webkit-transform: rotate(0deg) translateZ(0);
+}
+
+/* line 222, ../sass/style.scss */
+#pullUp .pullUpIcon {
+  -webkit-transform: rotate(-180deg) translateZ(0);
+}
+
+/* line 226, ../sass/style.scss */
+#pullDown.flip .pullDownIcon {
+  -webkit-transform: rotate(-180deg) translateZ(0);
+}
+
+/* line 230, ../sass/style.scss */
+#pullUp.flip .pullUpIcon {
+  -webkit-transform: rotate(0deg) translateZ(0);
+}
+
+/* line 234, ../sass/style.scss */
+#pullDown.loading .pullDownIcon, #pullUp.loading .pullUpIcon {
+  background-position: 0 100%;
+  -webkit-transform: rotate(0deg) translateZ(0);
+  -webkit-transition-duration: 0ms;
+  -webkit-animation-name: loading;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes loading {
+  from {
+    -webkit-transform: rotate(0deg) translateZ(0);
+  }
+  to {
+    -webkit-transform: rotate(360deg) translateZ(0);
+  }
+}
+.lf-zl-noData{
+  position: absolute;
+  top:20%;
+  left:50%;
+  width: 200px;
+  font-size: 20px;
+  text-align: center;
+  display: block;
+  margin-left: -100px;
+  color: #d8d8d8;
+}
+/*# sourceMappingURL=style.css.map */

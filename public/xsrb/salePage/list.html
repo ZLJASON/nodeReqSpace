@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>销售日报</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable = no"/>
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" type="text/css" href="../js/lib/easyui-1.4.3/themes/metro/easyui.css">
+  <link rel="stylesheet" type="text/css" href="../js/lib/easyui-1.4.3/themes/mobile.css">
+  <link rel="stylesheet" type="text/css" href="../js/lib/easyui-1.4.3/themes/icon.css">
+  <link rel="stylesheet" href="../stylesheets/screen.css" />
+  <link rel="stylesheet" href="../stylesheets/style.css" />
+</head>
+<body>
+    <div class="lf-top-toolC">
+        <input id="queryYData" class="Wdate lf-query-data" type="text"  onfocus="WdatePicker({dateFmt:'yyyy年',readOnly:true})">
+        <input id="queryMData" class="Wdate lf-query-data" type="text"  onfocus="WdatePicker({dateFmt:'MM月',readOnly:true})">
+        <input id="queryDData" class="Wdate lf-query-data" type="text"  onfocus="WdatePicker({dateFmt:'dd日',readOnly:true})">
+        <a id="queryBtn" href="javascript:void(0)" class="lf-btn-query">查询</a>
+    </div>
+    <div class="lf-page-content lf-page-content-l">
+        <div id="wrapper">
+            <div id="scroller">
+
+            </div>
+        </div>
+    </div>
+    <div class="lf-page-footer"></div>
+
+    <script id="list-template" type="text/x-handlebars-template">
+        {{#each this}}
+            <div class="lf-zl-newItem-Cont" onclick="jumpPage('detail.html?date={{this}}')">
+                <div class="lf-zl-newItem-titleCont">
+                    <div class="lf-zl-newItem-title" data-bind="text:title">{{titleDateF this}}</div>
+                    <div class="lf-zl-newItem-showTime" data-bind="text:showTime">{{this}}</div>
+                </div>
+                <div class="lf-zl-newItem-titleBtn"></div>
+            </div>
+        {{/each}}
+    </script>
+  <script src="../js/lib/require/require.js"  data-main="../js/pages/list"></script>
+</body>
+</html>

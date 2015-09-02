@@ -1,0 +1,99 @@
+/*-----------*/
+@import "compass/reset";
+@import "compass/layout";
+@import "compass/typography";
+@import "compass/typography/links";
+@import "compass/typography/lists/bullets";
+@import "compass/typography/text";
+@import "compass/typography/text/replacement";
+@import "compass/typography/vertical_rhythm";
+@import "compass/css3";
+@import "compass/css3/selection";
+@import "compass/utilities/tables";
+@import "compass/utilities/tables/scaffolding";
+
+@import "compass/utilities/general";
+$base-font-sizent-size:16px;
+$base-line-height:24px;
+$browser-minimum-versions:("chrom":"6");
+html,body{
+  //@include grid-background;
+  @include  debug-vertical-alignment();
+  @include  stretch();
+}
+@include  establish-baseline();
+.stretch{
+  @include  stretch();
+  z-index: 1;
+  //background: image-url("1.jpg");
+}
+.stretch_2{
+  @include  stretch();
+  background: #ffffff;
+  z-index: -2;
+  table{
+    margin: 1em;
+    $table-color: #7a98c6;
+    @include table-scaffolding;
+    @include inner-table-borders(1px, darken($table-color, 10%));
+    @include outer-table-borders(1px);
+    @include table-scaffolding();
+  }
+}
+/*!footer*/
+@include sticky-footer(54px);
+$default-text-shadow-color :yellow;
+#footer{
+    @include  text-shadow;
+    @include  border-radius(10px,20px);
+    @include  box-shadow(1px 1px 2px 3px red);
+}
+
+.btn{
+  @include appearance("button");
+}
+//.link{
+  //@include  no-bullet;
+  //@include  link-colors(#ffeedd, blue, yellow, green,red);
+//}
+.text{
+  //@include force-wrap;
+  @include ellipsis;
+  width: 200px;
+  height: 100px;
+  //@include  squish-text();
+  //@include hide-text();
+  @include replace-text("1.jpg");
+}
+h1{
+  @include adjust-font-size-to(48px);
+}
+h2{
+  @include adjust-font-size-to(36px);
+}
+h3{
+  @include adjust-font-size-to(24px);
+}
+h4{
+  @include adjust-font-size-to(21px);
+}
+p{
+  @include adjust-font-size-to(16px);
+}
+.clearFix{
+  @include legacy-pie-clearfix();
+}
+.pule-left{
+  @include float("left");
+}
+.pule-rigth{
+  @include float("right");
+}
+.hasLoayout{
+  @include  has-layout();
+}
+.tag-clorCont{
+  @include  tag-cloud(24px);
+}
+@import "icons";
+

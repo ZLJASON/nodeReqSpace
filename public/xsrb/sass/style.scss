@@ -1,0 +1,202 @@
+@import "compass/css3";
+@import "compass/layout/stretching";
+@import "compass/typography/links";
+@import "compass/typography/text/ellipsis";
+@import "compass/typography/text/force-wrap";
+@import "compass/utilities/tables/borders";
+$normal:#fff;
+$hover:rgb(239,239,239);
+$active:#fff;
+$visited:yellow;
+$focus:#d8d8d8;
+$bordeCo:black;
+
+body{
+  background-image: url('../img/cont-bg-i.png');
+  background-size: 100% auto;
+  background-repeat: none;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  font-size: 12px;
+  font-family: "微软雅黑";
+}
+
+/*顶部工具条*/
+.lf-top-toolC{
+  background-color: #efefef;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 10px;
+}
+.lf-query-data{
+  width: 70px;
+}
+.lf-btn-query{
+  width: 60px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  color: #fff;
+  float: right;
+  background: #eb5b5a;
+  margin:12px 10px auto 5px;
+  text-decoration: none;
+  @include border-radius(8px);
+  @include link-colors($normal, $hover, $active, $visited, $focus)
+}
+/*列表内容*/
+.lf-page-content{
+  @include stretch;
+  padding-bottom: 40px;
+  overflow: auto;
+}
+.lf-page-content.lf-page-content-l{
+  top:50px;
+}
+.lf-page-footer{
+  width: 100%;
+  height: 30px;
+  bottom: 5px;
+  position: absolute;
+  background-image: url('../img/cont-ft-bg-i.png');
+  background-size: auto 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+/*新闻列表 */
+.lf-zl-newItem-Cont{
+  padding:10px;
+  height: 50px;
+  border-top:1px solid #d5d6d1;
+}
+.lf-zl-newItem-Cont:active{
+  background: rgba(0,0,0,0.2);
+  color:#fff;
+}
+.lf-zl-newItem-titleBtn{
+  width:20px;
+  float:right;
+  height: 100%;
+  background-image: url('../img/left-info-i.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+}
+.lf-zl-newItem-titleCont{
+  width: 80%;
+  float:left;
+  margin-bottom:10px;
+}
+
+.lf-zl-newItem-titleCont-1{
+  display: inline-block;
+  width: 70%;
+}
+.lf-zl-newItem-title,.lf-zl-newItem-descript,.lf-zl-newMenuItem-title{
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.lf-zl-newItem-title{
+  height:30px;
+  line-height:30px;
+  font-size:16px;
+  font-weight: bold;
+}
+.lf-zl-newItem-descript{
+  max-height:30px;
+  overflow:hidden;
+  font-size:10px;
+  line-height:14px;
+  text-overflow: ellipsis;
+}
+.lf-zl-newItem-showTime{
+  font-size: 10px;
+}
+
+
+/*详细页*/
+.lf-detail-cont{
+  margin:20px 10px;
+  overflow:hidden;
+  @include outer-table-borders(1px, $bordeCo);
+  @include inner-table-borders(1px, $bordeCo);
+}
+.lf-detail-cont table{
+  width: 100%;
+}
+.lf-detail-cont td{
+  text-align: center;
+  padding:5px;
+  @include  ellipsis;
+}
+.lf-detail-t1{
+  font-size: 16px;
+  font-weight: bold;
+}
+.lf-detail-t2,.lf-detail-t3{
+  font-weight: bold;
+
+}
+.lf-detail-t2{
+  background: #fcd5b4;
+}
+.lf-detail-t3{
+  background: #58d6e4;
+}
+.lf-detail-info{
+  color:#989898;
+  display: block;
+  max-width: 60px;
+  margin:auto;
+  @include force-wrap;
+}
+
+
+
+#wrapper {
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  bottom: 40px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+#scroller {
+  position: absolute;
+  z-index: 1;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  width: 100%;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  -o-text-size-adjust: none;
+  text-size-adjust: none;
+}
+.lf-zl-noData{
+  position: absolute;
+  top:20%;
+  left:50%;
+  width: 200px;
+  font-size: 20px;
+  text-align: center;
+  display: block;
+  margin-left: -100px;
+  color: #d8d8d8;
+}

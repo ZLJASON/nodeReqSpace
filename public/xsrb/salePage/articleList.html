@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>新闻列表</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="css/amazeui.min.css"/>
+    <link rel="stylesheet" href="css/animate.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="js/swiper/css/swiper.min.css">
+    <!--// jquery //-->
+    <script src='js/jquery-2.1.3.js' type="text/javascript"></script>
+    <script src='js/jquery.xml2json.js' type="text/javascript" language="javascript"></script>
+    <script src='js/jquery.soap.js' type="text/javascript" language="javascript"></script>
+    <!-- 模板 -->
+    <script src="js/knockout-3.2.0.js"></script>
+    <!-- 下拉刷新 -->
+    <script src='js/Mydropload.js' type="text/javascript" language="javascript"></script>
+    <!-- 滑动 -->
+    <script src='js/swiper/js/swiper.jquery.min.js'></script>
+    <script src='js/common.js' type="text/javascript" language="javascript"></script>
+    <script src='js/dataSource.js' type="text/javascript" language="javascript"></script>
+</head>
+<body>
+<div id="msgDom" class="animated">
+</div>
+<!-- iframeCont -->
+<div id="iframeCont" class="animated fadeInLeft">
+    <iframe id="framecont" src="" frameborder="0"></iframe>
+</div>
+<!-- TODO 预留toolbar -->
+<div class="lf-tab-wap">
+    <!-- tab头部 -->
+    <div class="lf-tab-index-serCont">
+         <span class="lf-search-icon"></span>
+         <input type="text" id="text" name="key" class="lf-search">
+    </div>
+    <!-- tab内容 -->
+    <div class="tab-container swiper-container dropload-contain">
+        <div class="swiper-wrapper" style="height: 100%;padding-bottom:50px;"> 
+                <div class="swiper-slide swiper-slide-active" style="overflow-y:auto;">
+                <div data-bind="foreach:articleList">
+                    <div class="lf-zl-newItem-Cont" data-bind="click:function(){jumpPage(id,isText,linkUrl,type)}">
+                        <div class="lf-zl-newItem-titleImg" data-bind="style:{display:titleImg!=''?'block':'none'}">
+                            <img data-bind="attr:{src:titleImg}" alt="">
+                        </div>
+                        <div class="lf-zl-newItem-titleCont">
+                            <div class="lf-zl-newItem-title" data-bind="text:title"></div>
+                            <div class="lf-zl-newItem-descript" data-bind="text:descript"></div>
+                            <div class="lf-zl-newItem-showTime" data-bind="text:showTime"></div>
+                        </div>
+                        <div class="lf-zl-newItem-titleBtn"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Logo  -->
+<div class="lf-cont-ft"></div>
+<script type="text/javascript">
+    var defaltAppIcon = 'http://mtest.xudc.com:8080/house/upload/clientapp/appIcon/images/2014-11-19/20141119182800_32.png';
+    // 视图模型
+    var viewModel = {};
+    viewModel.articleList = ko.observableArray([]);
+    // 监听视图
+    ko.applyBindings(viewModel);
+    //
+    var _sessionId = "";
+    var _channelId=QueryString("id");
+    // 获取数据参数配置和回调函数
+    var dataSourceParam = {
+        articleList: {
+            sessionId: _sessionId,
+            page: 1,
+            numPerPage: 10,
+            channelId: _channelId
+        }
+    };
+    $(function () {
+        _temp();
+    });
+
+
+    function _temp() {
+        requestSessionId().done(function (sessionId) {
+            dataSourceParam.articleList.sessionId = sessionId;
+            getArticleList(dataSourceParam.articleList, getArticleListCallFn);
+        });
+    }
+
+    function jump(item) {
+        console.log(item);
+    }
+
+    function getArticleListCallFn(data) {
+        console.log(data);
+        var list = data.item;
+        if (dataSourceParam.articleList.page > 1) {
+            // 有数据追加
+            if (list) {
+                viewModel.articleList(viewModel.articleList().concat(extendEachData(list)));
+            }
+        } else {
+            viewModel.articleList([]);
+            viewModel.articleList(extendEachData(list));
+        }
+    }
+    /*
+     下拉刷新和加载
+     */
+    var dropload = $('.dropload-contain').dropload({
+        domUp: {
+            domClass: 'dropload-up'
+        },
+        domDown: {
+            domClass: 'dropload-down',
+            domLoad: '<div class="dropload-load" style="top: -50px"><span class="loading"></span>加载中...</div>'
+        },
+        activeLabel: ".swiper-slide-active",
+        loadUpFn: function (me) {
+            dataSourceParam.articleList.page = 1;
+            getArticleList(dataSourceParam.articleList, getArticleListCallFn);
+            setTimeout(function () {
+                me.resetload();
+            }, 400);
+        },
+        loadDownFn: function (me) {
+            // newsList
+            dataSourceParam.articleList.page++;
+            getArticleList(dataSourceParam.articleList, getArticleListCallFn);
+            setTimeout(function () {
+                me.resetload()
+            }, 400);
+        }
+    });
+
+    var _tempData = {
+        descript: "",
+        id: "",
+        isText: "",
+        linkUrl: "",
+        showTime: "",
+        title: "",
+        titleImg: "",
+        type: "1"
+    };
+    /*补充后台返回数据缺少的数据*/
+    function extendTempData(data, tempData) {
+        for (var i in tempData) {
+            if (!(i in data)) {
+                data[i] = tempData[i];
+            }
+        }
+        return data;
+    }
+    function extendEachData(data) {
+        var _temp = [];
+        $.each(data, function (i, e) {
+            _temp.push(extendTempData(e, _tempData));
+        })
+        return _temp;
+    }
+</script>
+</body>
+</html>

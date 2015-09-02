@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>销售日报</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable = no"/>
+  <meta name="renderer" content="webkit">
+  <link rel="stylesheet" type="text/css" href="../js/lib/easyui-1.4.3/themes/metro/easyui.css">
+  <link rel="stylesheet" type="text/css" href="../js/lib/easyui-1.4.3/themes/mobile.css">
+  <link rel="stylesheet" type="text/css" href="../js/lib/easyui-1.4.3/themes/icon.css">
+  <link rel="stylesheet" href="../stylesheets/screen.css" />
+  <link rel="stylesheet" href="../stylesheets/style.css" />
+</head>
+<body>
+    <div class="lf-page-content" id="content">
+    </div>
+    <div class="lf-page-footer"></div>
+    <script id="type1-template" type="text/x-handlebars-template">
+
+        {{#isEmptyArray this}}
+            {{#each this}}
+              <div class="lf-detail-cont">
+                <table>
+                    <tr>
+                        <td class="lf-detail-t1" colspan="6" >{{companyName}}</td>
+                    </tr>
+                    <tr>
+                        <td class="lf-detail-t2" colspan="2">今日来访新(组)</td>
+                        <td class="lf-detail-t2" colspan="2">今日来访老(组)</td>
+                        <td class="lf-detail-t2" colspan="2">今日来访电(组)</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <storng>{{todayNewVisitorCount}}</storng>
+                            <span class="lf-detail-info">
+                                ({{todayNewVisitDetail}})
+                            </span>
+                        </td>
+                        <td colspan="2">
+                            <storng>{{todayOldVisitorCount}}</storng>
+                            <span class="lf-detail-info">
+                                ({{todayOldVisitDetail}})
+                            </span>
+                        </td>
+                        <td colspan="2">
+                            <storng>{{todayIncomingTelCount}}</storng>
+                            <span class="lf-detail-info">
+                                ({{todayIncomingTelDetail}})
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lf-detail-t2" colspan="2">今日认购(套/万元)</td>
+                        <td class="lf-detail-t2" colspan="2">本月认购(套/万元)</td>
+                        <td class="lf-detail-t2" colspan="2">本年认购(套/万元)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <storng>{{todaySubscriptionCount}}</storng>
+                            <span class="lf-detail-info">
+                                ({{todaySubscriptionDetail}})
+                            </span>
+                        </td>
+                        <td >
+                            <strong>{{todaySubscriptionAmount}}</strong>
+                        </td>
+                        <td>
+                            <storng>{{curMonthSubscriptionCount}}</storng>
+                            <span class="lf-detail-info">
+                                ({{curMonthSubscriptionDetail}})
+                            </span>
+                        </td>
+                        <td >
+                            <strong>{{curMonthSubscriptionAmount}}</strong>
+                        </td>
+                        <td>
+                            <storng>{{curYearSubscriptionCount}}</storng>
+                            <span class="lf-detail-info">
+                                ({{curYearSubscriptionDetail}})
+                            </span>
+                        </td>
+                        <td >
+                            <strong>{{curYearSubscriptionAmount}}</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lf-detail-t2" colspan="2">今日签约(套/万元)</td>
+                        <td class="lf-detail-t2" colspan="2">本月签约(套/万元)</td>
+                        <td class="lf-detail-t2" colspan="2">本年签约(套/万元)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <storng>{{todaySignedCount}}</storng>
+                            <span class="lf-detail-info">
+                                ({{todaySignedDetail}})
+                            </span>
+                        </td>
+                        <td >
+                            <strong>{{todaySignedAmount}}</strong>
+                        </td>
+                        <td>
+                            <storng>{{curMonthSignedCount}}</storng>
+                            <span class="lf-detail-info">
+                                ({{curMonthSignedDetail}})
+                            </span>
+                        </td>
+                        <td >
+                            <strong>{{curMonthSignedAmount}}</strong>
+                        </td>
+                        <td>
+                            <storng>{{curYearSignedCount}}</storng>
+                            <span class="lf-detail-info">
+                                ({{curYearSignedDetail}})
+                            </span>
+                        </td>
+                        <td >
+                            <strong>{{curYearSignedAmount}}</strong>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            {{/each}}
+        {{else}}
+            <span class='lf-zl-noData'>暂无数据</span>
+        {{/isEmptyArray}}
+    </script>
+    <script id="type2-template" type="text/x-handlebars-template">
+        {{#isEmptyArray this}}
+            {{#each this}}
+            <div class="lf-detail-cont">
+                <table>
+                    <tr>
+                        <td class="lf-detail-t1" colspan="6">{{companyName}}</td>
+                    </tr>
+                    <tr>
+                        <td class="lf-detail-t3" colspan="2">今日认购(套/万元)</td>
+                        <td class="lf-detail-t3" colspan="2">本月认购(套/万元)</td>
+                        <td class="lf-detail-t3" colspan="2">本年认购(套/万元)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <storng>{{todaySubscriptionCount}}</storng>
+                                <span class="lf-detail-info">
+                                    ({{todaySubscriptionDetail}})
+                                </span>
+                        </td>
+                        <td >
+                            <strong>{{todaySubscriptionAmount}}</strong>
+                        </td>
+                        <td>
+                            <storng>{{curMonthSubscriptionCount}}</storng>
+                                <span class="lf-detail-info">
+                                    ({{curMonthSubscriptionDetail}})
+                                </span>
+                        </td>
+                        <td >
+                            <strong>{{curMonthSubscriptionAmount}}</strong>
+                        </td>
+                        <td>
+                            <storng>{{curYearSubscriptionCount}}</storng>
+                                <span class="lf-detail-info">
+                                    ({{curYearSubscriptionDetail}})
+                                </span>
+                        </td>
+                        <td >
+                            <strong>{{curYearSubscriptionAmount}}</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="lf-detail-t3" colspan="2">今日签约(套/万元)</td>
+                        <td class="lf-detail-t3" colspan="2">本月签约(套/万元)</td>
+                        <td class="lf-detail-t3" colspan="2">本年签约(套/万元)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <storng>{{todaySignedCount}}</storng>
+                                <span class="lf-detail-info">
+                                    ({{todaySignedDetail}})
+                                </span>
+                        </td>
+                        <td >
+                            <strong>{{todaySignedAmount}}</strong>
+                        </td>
+                        <td>
+                            <storng>{{curMonthSignedCount}}</storng>
+                                <span class="lf-detail-info">
+                                    ({{curMonthSignedDetail}})
+                                </span>
+                        </td>
+                        <td >
+                            <strong>{{curMonthSignedAmount}}</strong>
+                        </td>
+                        <td>
+                            <storng>{{curYearSignedCount}}</storng>
+                                <span class="lf-detail-info">
+                                    ({{curYearSignedDetail}})
+                                </span>
+                        </td>
+                        <td >
+                            <strong>{{curYearSignedAmount}}</strong>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            {{/each}}
+        {{else}}
+             <span class='lf-zl-noData'>暂无数据</span>
+        {{/isEmptyArray}}
+    </script>
+  <script src="../js/lib/require/require.js"  data-main="../js/pages/detail"></script>
+</body>
+</html>

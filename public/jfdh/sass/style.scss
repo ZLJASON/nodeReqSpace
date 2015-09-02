@@ -1,0 +1,139 @@
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/layout/stretching";
+@import "compass/typography/text/ellipsis";
+@import "compass/typography/lists/inline-block-list";
+html,body{
+  @include  stretch(0,0);
+  color:#fb5606;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: "Î¢ÈíÑÅºÚ" "ËÎÌå";
+}
+body{
+  background: #fffde4;
+}
+.lf-jf-content{
+  padding: 5%;
+  width: 90%;
+  margin:0 auto;
+}
+.lf-jf-userInfo{
+  background: #fb5606;
+  color: #fff;
+  padding-top:3px;
+  line-height: 15px;
+  margin-bottom: 2px;
+  font-size: 18px;
+  padding-bottom: 10px;
+}
+.lf-jf-img{
+  background-image: image-url("jf-img.png");
+  height: 140px;
+  background-position-x: 50%;
+  background-position-y: 14px;
+  background-repeat: no-repeat;
+}
+.lf-jf-img-i{
+  position: relative;
+  left: 50%;
+  margin-left: -16px;
+  width: 20px;
+  height:20px;
+  background-image: image-url("jf-img-1.png");
+  background-size-y: 100%;
+  background-repeat: no-repeat;
+  top: 133px;
+}
+.lf-jf-spearbox{
+  position: relative;
+  top:0px;
+  left:0px;
+  height: 10px;
+  width: 10px;
+  background: blue;
+}
+.lf-jf-userInfo table{
+  width: 100%;
+}
+table td{
+  text-align: center;
+  padding:5px;
+}
+.lf-jf-item{
+  margin: 10px auto;
+}
+.lf-jf-items{
+  border-top: 1px solid #a5a396;
+}
+.lf-jf-lImg{
+  width: 120px;
+  height: 100px;
+  float: left;
+  @include border-radius(10px);
+  border: 1px solid #c0c0c0;
+  background: #fff;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+}
+.lf-jf-lImg img{
+  max-width: 90%;
+  max-height: 90%;
+  margin:5%;
+}
+.lf-jf-title{
+  margin-top:15px;
+  margin-bottom:10px;
+  @include  ellipsis();
+}
+.lf-jf-dh-btn{
+  margin-left: -7px;;
+  margin-top: 5px;
+  padding:5px 0px 5px 7px;
+  background: #cccccc;
+  color:black;
+  letter-spacing:14px;
+  text-align: center;
+  @include border-radius(10px);
+}
+.lf-jf-dh-btn:active{
+  background: #f14300;
+  color:#fff;
+}
+.lf-jf-score-2{
+  color: black;
+  font-size: 10px;
+  background: #fd933d;
+  padding:1px 5px;
+  float: right;
+  @include border-radius(5px);
+}
+.lf-jf-dh-btn{
+  width: 100%;
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  //margin: 10px 0px;
+}
+.lf-jf-rCont{
+  height: 102px;
+  width: 50%;
+  float: left;
+  margin-left: 20px;
+}
+.lf-jf-head{
+  padding:10px;
+  height: 20px;
+  margin:20px 0px -30px 20px;
+  background-image:image_url("logo.png");
+  background-repeat:no-repeat ;
+  background-size: 60%;
+}
+.lf-jf-headCont{
+  height: 300px;
+  text-align: center;
+}
+.lf-clear{
+  @include pie-clearfix;
+}

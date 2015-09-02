@@ -1,0 +1,187 @@
+//sass style
+//------------默认变量-------------------
+$borderDirection:       top !default;
+$baseFontSize:          12px !default;
+$baseLineHeight:        1.5 !default;
+$lte7:false !default;
+//------------变    量-------------------
+$fontSize: 12px;
+//------------多值变量-------------------
+//一维数据
+$px: 5px 10px 20px 30px;
+
+//二维数据，相当于js中的二维数组
+$px: 5px 10px, 20px 30px;
+$px: (5px 10px) (20px 30px);
+
+
+$linkColor:         red blue !default;//第一个值为默认值，第二个鼠标滑过值
+a{
+  color:nth($linkColor,1);
+
+  &:active{
+    color:nth($linkColor,2) !important;
+  }
+}
+//------------map变量-------------------
+$headings: (h1: 2em, h2: 1.5em, h3: 1.2em);
+@each $header, $size in $headings {
+  .#{$header}-table {
+    font-size: $size;
+  }
+}
+//------------特殊变量-------------------
+//如果变量作为属性或在某些特殊情况下等则必须要以#{$variables}形式使用
+//应用于class和属性
+.border-#{$borderDirection}{
+  border-#{$borderDirection}:1px solid #ccc;
+}
+*{
+  margin: 0px !important;
+  padding: 0px !important;;
+}
+html,body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font:#{$baseFontSize}/#{$baseLineHeight};
+  height: 100%;
+  width: 100%;
+}
+
+
+//------------嵌套(Nesting)-------------------
+#top_nav{
+  line-height: 40px;
+  text-transform: capitalize;
+  background-color:#333;
+  li{
+    float:left;
+  }
+  a{
+    display: block;
+    padding: 0 10px;
+    color: #fff;
+
+    &:hover{
+      color:#ddd;
+    }
+  }
+}
+
+
+.fakeshadow {
+  border: {
+    style: solid;
+    left: {
+      width: 4px;
+      color: #888;
+    }
+    right: {
+      width: 2px;
+      color: #ccc;
+    }
+  }
+}
+//@at-root 用来跳出选择器嵌套的。默认所有的嵌套
+//多个选择器跳出
+.parent-3 {
+  background:#f00;
+  @at-root {
+    .child1 {
+      width:300px;
+    }
+    .child2 {
+      width:400px;
+    }
+  }
+}
+//混合
+//@mixin声明混合，可以传递参数，参数名以$符号开始，多个参数以逗号分开
+//@include来调用。
+@mixin opacity($opacity:50) {
+  opacity: $opacity / 100;
+  filter: alpha(opacity=$opacity);
+}
+.deom1{
+  @include opacity(60);
+}
+.demo{
+  @include opacity;
+}
+
+//@content  主要是用于media
+@mixin max-screen($res){
+  @media only screen and ( max-width: $res )
+  {
+    @content;
+  }
+}
+
+@include max-screen(480px) {
+  body {
+    color: red;
+    @include  opacity;
+  }
+}
+
+
+//继承
+h1{
+  border: 4px solid #ff9aa9;
+}
+.speaker{
+  @extend h1;
+  border-width: 2px;
+}
+//占位选择器%
+%ir{
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+%clearfix{
+  @if $lte7 {
+    *zoom: 1;
+  }
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+    font: 0/0 a;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.ir{
+  @extend %ir;
+}
+
+// 函数
+@function pxToRem($px) {
+  @return $px / $baseFontSize * 1rem;
+}
+
+//计算
+$_columns:                     12 !default;      // Total number of columns
+$_column-width:                60px !default;   // Width of a single column
+$_gutter:                      20px !default;     // Width of the gutter
+$_gridsystem-width:            $_columns * ($_column-width + $_gutter); //grid system width
+
+.test{
+  font-size:pxToRem(16px);
+  width: $_gridsystem-width;
+}
+
+// --update --sourcemap -
+$radius:15px;
+$vertical-radius:10px;
+
+/*-----------*/
+@import "compass/reset";
+.tet_10{
+  border: 10px solid red;
+}

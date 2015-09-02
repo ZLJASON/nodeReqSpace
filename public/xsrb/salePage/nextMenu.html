@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>新闻列表</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="css/amazeui.min.css"/>
+    <link rel="stylesheet" href="css/animate.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="js/swiper/css/swiper.min.css">
+    <!--// jquery //-->
+    <script src='js/jquery-2.1.3.js' type="text/javascript"></script>
+    <script src='js/jquery.xml2json.js' type="text/javascript" language="javascript"></script>
+    <script src='js/jquery.soap.js' type="text/javascript" language="javascript"></script>
+    <!-- 模板 -->
+    <script src="js/knockout-3.2.0.js"></script>
+    <!-- 下拉刷新 -->
+    <script src='js/Mydropload.js' type="text/javascript" language="javascript"></script>
+    <!-- 滑动 -->
+    <script src='js/swiper/js/swiper.jquery.min.js'></script>
+    <script src='js/common.js' type="text/javascript" language="javascript"></script>
+    <script src='js/dataSource.js' type="text/javascript" language="javascript"></script>
+</head>
+<body>
+<div id="msgDom" class="animated">
+</div>
+<!-- TODO 预留toolbar -->
+<div class="lf-tab-wap">
+    <div data-bind="foreach:menus">
+        <div class="lf-zl-newMenuItem-Cont" data-bind="click:jump">
+            <div class="lf-zl-newMenuItem-titleImg">
+                <img class="lf-zl-newMenuI" data-bind="attr:{src:titleImg}" alt="">
+            </div>
+            <div class="lf-zl-newMenuItem-titleCont">
+                <div class="lf-zl-newMenuItem-title" data-bind="text:name"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Logo  -->
+<div class="lf-cont-ft"></div>
+<script type="text/javascript">
+    var defaltAppIcon  = 'http://mtest.xudc.com:8080/house/upload/clientapp/appIcon/images/2014-11-19/20141119182800_32.png';
+    // 视图模型
+    var viewModel = {};
+    viewModel.menus = ko.observableArray([]);
+    // 监听视图
+    ko.applyBindings(viewModel);
+    //  
+    var _sessionId = QueryString("sessionId")||"";
+    var _menuId=QueryString("id")||"15";
+    // 获取数据参数配置和回调函数
+    var dataSourceParam = {
+        nextMenu: {
+            sessionId: _sessionId,
+            menuId: _menuId
+        }
+    };
+    $(function () {
+        _temp();
+    });
+
+
+    function _temp() {
+        requestSessionId().done(function (sessionId) {
+            dataSourceParam.nextMenu.sessionId = sessionId;
+            getNextMenu(dataSourceParam.nextMenu, getNextMenuCallFn);
+        });
+        function getNextMenuCallFn(data) {
+            console.log(data);
+            viewModel.menus(data.item);
+        }
+    }
+
+    function jump(item){
+        window.location.href="articleList.html?id="+item.id;
+    }
+
+</script>
+</body>
+</html>
