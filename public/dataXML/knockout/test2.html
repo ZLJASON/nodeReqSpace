@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+<body>
+<button id="btn"> click me</button>
+<script type="text/javascript">
+function a() {
+    test1();
+    test2();
+    test3();
+}
+
+function b() {
+a();
+}
+
+function c() {
+b();
+}
+
+document.getElementById('btn').addEventListener('click', c, true);
+function test1(){
+    test2();
+}
+function test2(){
+    test3();
+}
+function test3(){
+    console.log(33);
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<html>
+<head>
+    <title>绑定语法</title>
+    <meta charset="utf-8">
+    <script src="knockout-3.2.0.js"></script>
+    <style>.css1{color: #0000ff;}</style>
+</head>
+<body>
+<!-- Visible绑定语法 -->
+<div data-bind = "visible:pVisible" > Visible 绑定</div>
+<div data-bind = "visible:strVisible().length > 0 " >  条件表达式 绑定 </div>
+<!-- text绑定语法 -->
+<span data-bind = "text:pText" ></span> 000<br/>
+<span data-bind = "text:fnText" ></span><br/>
+<span data-bind = "text:htmlText" ></span><br/>
+<!-- HTML绑定语法 -->
+<div data-bind = "html:pHtml" ></div><br/>
+<!-- CSS 绑定 -->
+<span data-bind = "css:pCss" >CSS绑定</span> <br/>
+<!-- Style绑定 -->
+<span data-bind = "style:{ color:pStyle} ">Style绑定</span><br/>
+<!-- attr绑定 -->
+<a data-bind = "attr : {href:attrHref,text:attrText} " >百度</a><br/>
+<!-- Click绑定 -->
+<button data-bind="click: pClick" >Click</button>
+<!-- Event绑定 -->
+<div data-bind="event:{mouseover:pOver}" >Event 绑定 </div>
+<!-- Submit绑定 -->
+<form data-bind = "submit:pSubmit" >
+    ...<input type="text" value="" /> <br/>
+    <button type="submit" >Submit</button>
+</form>
+<!-- enable/disable 绑定 -->
+<input type='checkbox' data-bind="checked: pChecked"/>
+<input type='text' data-bind="enable: pChecked" value="enable" />
+<input type='text' data-bind="disable: pChecked" value="disable" /><br/>
+<!-- Value绑定 -->
+afterkeydown:<input type="text" data-bind="value:pValue,valueUpdate:'afterkeydown'" />
+change(默认):<input type="text" data-bind="value:pValue" />
+keyup::<input type="text" data-bind="value:pValue,valueUpdate:'keyup'" />
+keypress::<input type="text" data-bind="value:pValue,valueUpdate:'keypress'" />
+<!-- Checked 绑定 -->
+<div><input type="checkbox" value="t1" data-bind="checked: pCheckSections"/> Cherry</div>
+<div><input type="checkbox" value="t2" data-bind="checked: pCheckSections"/> Almond</div>
+<div><input type="checkbox" value="t3" data-bind="checked: pCheckSections"/> Eabjkkkk</div>
+<!-- Radio 绑定 -->
+<div><input type="radio" name="flavorGroup" value="t1" data-bind="checked: pRadio"/> Cherry</div>
+<div><input type="radio" name="flavorGroup" value="t2" data-bind="checked: pRadio"/> Almond</div>
+<div><input type="radio" name="flavorGroup" value="t3" data-bind="checked: pRadio"/> Monosodium Glutamate</div>
+<!-- Select 绑定 -->
+<select data-bind="options:pOption"></select>
+<select data-bind="options:pOption,selectedOptions:pOptionSelected"  multiple="true"></select>
+<select data-bind="options:pOption2,optionsText:'name',value:pOption2Value,optionsCaption:'请选择'"></select>
+<select data-bind="options:pOption2,optionsText:function(item){return item.name+' '+item.value},value:pOption2Value,optionsCaption:'请选择'"></select>
+<input data-bind="value:pOption2Value()?pOption2Value().value:'未知' " /> <br/>
+<!-- uniqueName 绑定 -->
+<input type='text' value='uniqueName绑定' data-bind="uniqueName:true" />
+</body>
+<script type="text/javascript">
+    var viewModel={} ;//Visible语法
+    viewModel.pVisible = ko.observable(true) ;
+    viewModel.strVisible = ko.observable("xxxxxxxx") ;//text绑定语法
+    viewModel.pText = ko.observable("text") ;
+    viewModel.fnText = ko.dependentObservable(function(){
+        return viewModel.pText().length == 0 ? "empty" : "something" ;
+    });
+    viewModel.htmlText = ko.observable("<b>font<b>") ;//html绑定
+    viewModel.pHtml = ko.observable("<b>HTML</b>") ;//CSS绑定
+    viewModel.pCss = ko.observable("css1") ;//style绑定
+    viewModel.pStyle = ko.observable("#0000ff") ;//attr绑定
+    viewModel.attrHref = ko.observable("http://www.baidu.com");
+    viewModel.attrText = ko.observable("百度");//Click绑定
+    viewModel.pClick = function(event){
+        alert(111);if(event.shiftKey) {
+        }else{
+        }
+    };//event绑定
+    viewModel.pOver = function(){
+        alert('over');
+    }//Submit绑定
+    viewModel.pSubmit = function(){
+        alert('Submit');
+    }//Disable/Enable绑定
+    viewModel.pChecked = ko.observable(true);//Value绑定
+    viewModel.pValue = ko.observable("test");//checked绑定
+    viewModel.pCheckSections = ko.observableArray(["t1","t2"]);
+    viewModel.pCheckSections.push("t3"); //RadioButton绑定
+    viewModel.pRadio = ko.observable("t1");//options绑定
+    viewModel.pOption = ko.observableArray(["法国","中国","西班牙"]);
+    viewModel.pOption.push("美国");
+    viewModel.pOptionSelected = ko.observable(["中国","西班牙"]);var person  = function(pname,pvalue){
+        this.name = pname;
+        this.value = pvalue;
+    }
+    viewModel.pOption2 = ko.observableArray([
+        new person("Key1","Value1"),
+        new person("Key2","Value2")
+    ]);
+    viewModel.pOption2Value = ko.observable();//应用ViewModel
+    ko.applyBindings(viewModel);</script>
+<script>
+    var arr=[["a"],{"list":["b"]},['c']];
+    foreach:$data
+    foreach:list
+</script>
+</html>

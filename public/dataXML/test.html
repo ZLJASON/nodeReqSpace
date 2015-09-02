@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head> 
+ <title></title>
+ <!--// documentation resources //-->
+ <script src='js/jquery-2.1.3.js' type="text/javascript"></script>
+ <script src='js/jquery.xml2json.js' type="text/javascript" language="javascript"></script>
+ <!-- // <script src='jquery.xslt.js' type="text/javascript" language="javascript"></script> -->
+ <script src='js/jquery.soap.js' type="text/javascript" language="javascript"></script>
+ <style>
+    #testI,html,body{
+      width:100%;height:100%;
+    }
+
+ </style>
+</head>
+<body style="width:100%;height:100%;">
+<button onclick="test3()" id="ok">测试</button>
+<iframe id="testI" src="" frameborder="0"></iframe>
+<div id="result"></div>
+<script type="text/javascript">
+    $(function(){
+        soapGetData({
+            url: 'http://mtest.xudc.com:8080/house/ws/organizationservice?wsdl',
+            method: 'newMemberLogin',
+            data: {
+                username:'lbg',
+                password: '',
+                uuid:'123321123321213',
+                token:'',
+                deviceType:''
+            },   
+            namespaceURL: 'http://mtest.xudc.com:8080/house',
+            beforeSend: function (SOAPEnvelope){
+                var array = [
+                    {name: 'a', phone: 1+'0'},
+                    {name: 'b', phone: 5+'0'},
+                    {name: 'd', phone: 3+'0'},
+                    {name: 'c', phone: 4+'0'}
+                ];
+                array.sort(getSortFun('desc', 'phone'));
+                // function getSortFun(order, sortBy) {
+                //     var ordAlpah = (order == 'asc') ? '>' : '<';
+                //     var sortFun = new Function('a', 'b', 'return a.' + sortBy + ordAlpah + 'b.' + sortBy + '?1:-1');
+                //     return sortFun;
+                // }
+
+                function getSortFun(order, sortBy) {
+                    var ordAlpah = (order == 'asc') ? '>' : '<';
+                    var sortFun = new Function('a', 'b', 'var _a=parseInt(a.' + sortBy +');var _b=parseInt(b.' + sortBy +'); return  _a' +  ordAlpah + '_b?1:-1');
+                    return sortFun;
+                }
+
+                alert(JSON.stringify(array));
+            },  
+            success: function (soapResponse) {
+                console.log(soapResponse.toJSON());
+            }
+        });
+    })
+
+    /*测试获取xml，写入页面*/
+    function test2(){
+      $.get("http://www.youku.com", function(xml){
+        // var json = $.xml2json(xml);
+        // if(window.console) console.log(['test-1 json:',json]);
+        // $('#result-1').html('');
+        // $.each(json['channel']['item'], function(i, obj){
+        //   $('#result').append('<p>Title: '+obj.title+'<br/>Link: '+obj.link+'<br/>Description: '+obj.description+'<br/></p>');
+        // });
+        // alert(typeof xml);
+        getIframeDocument($("#testI").get(0)).writeln(xml);
+      });
+    }
+    /*测试获取xml，写入页面*/
+    function test1(){
+      $.get("data/soap.xml", function(xml){
+        var json = $.xml2json(xml);
+        json.Body.getArticleListResponse.result
+        if(window.console) console.log(['test-1 json:',json]);
+        $("#result").html("<pre>123</pre>");
+      });      
+    }
+
+    /**/
+    
+    function changeXmlToJSON(xml,name){
+        var json = $.xml2json(xml);
+        json.Body[name].result;
+        return json
+    }
+    
+    function  test3(){
+        $("#ok").click(function(){
+            <!--可以通过拦截器获取请求信息-->
+            var str = '<?xml version="1.0" encoding="utf-16"?> <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"> <soap:Body> <newMemberLogin xmlns="http://mtest.xudc.com:8080/house"> <username xmlns="">lbg</username> <password xmlns="" /> <uuid xmlns="">123321123321213</uuid> <token xmlns="" /> <deviceType xmlns="" /> </newMemberLogin> </soap:Body> </soap:Envelope>'; 
+            // var str='<?xml version="1.0" encoding="UTF-16"?> <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"xmlns:xsd="http://www.w3.org/2001/XMLSchema"> <soap:Body> <newMemberLogin> <username>lbg</username> <password></password> <uuid>123321123321213</uuid> <token></token> <deviceType></deviceType> </newMemberLogin> </soap:Body> </soap:Envelope>';
+            $.ajax({
+                contentType:'application/xml;charset="UTF-8"',
+                dataType:'xml',//发送数据格式
+                type:'post',
+                url:'http://mtest.xudc.com:8080/house/ws/organizationservice?wsdl',  
+                data:str,
+                success:function(data){     
+                    console.dir(changeXmlToJSON(data,"newMemberLoginResponse"));
+                    console.log("json2xml",json2xml(changeXmlToJSON(data,"newMemberLoginResponse")));
+                }
+            },"xml");//数据返回格式为xml
+        });
+    };
+
+    var getIframeDocument = function(element) {
+        return  element.contentDocument || element.contentWindow.document;
+    };
+
+    function test4(){
+        var _o={
+  "ol":{
+    "@class":"xoxo",
+    "li":[
+      {
+        "#text":"Subject 1     ",
+        "ol":{"li":[
+            "subpoint a",
+            "subpoint b"
+          ]}
+      },
+      {
+        "span":"Subject 2",
+        "ol":{
+          "@compact":"compact",
+          "li":[
+            "subpoint c",
+            "subpoint d"
+          ]
+        }
+      }
+    ]
+  }
+};
+
+        console.info(json2xml(_o), { header: true});
+    }
+
+
+    function json2xml(o, tab) {
+       var toXml = function(v, name, ind) {
+          var xml = "";
+          if (v instanceof Array) {
+             for (var i=0, n=v.length; i<n; i++)
+                xml += ind + toXml(v[i], name, ind+"\t") + "\n";
+          }
+          else if (typeof(v) == "object") {
+             var hasChild = false;
+             xml += ind + "<" + name;
+             for (var m in v) {
+                if (m.charAt(0) == "@")
+                   xml += " " + m.substr(1) + "=\"" + v[m].toString() + "\"";
+                else
+                   hasChild = true;
+             }
+             xml += hasChild ? ">" : "/>";
+             if (hasChild) {
+                for (var m in v) {
+                   if (m == "#text")
+                      xml += v[m];
+                   else if (m == "#cdata")
+                      xml += "<![CDATA[" + v[m] + "]]>";
+                   else if (m.charAt(0) != "@")
+                      xml += toXml(v[m], m, ind+"\t");
+                }
+                xml += (xml.charAt(xml.length-1)=="\n"?ind:"") + "</" + name + ">";
+             }
+          }
+          else {
+             xml += ind + "<" + name + ">" + v.toString() +  "</" + name + ">";
+          }
+          return xml;
+       }, xml="";
+       for (var m in o)
+          xml += toXml(o[m], m, "");
+       return tab ? xml.replace(/\t/g, tab) : xml.replace(/\t|\n/g, "");
+    }
+
+
+    function test5(){
+        $.soap({
+            url: 'http://mtest.xudc.com:8080/house/ws/organizationservice?wsdl',
+            method: 'newMemberLogin',
+            data: {
+                username:'lbg',
+                password: '',
+                uuid:'123321123321213',
+                token:'',
+                deviceType:''
+            },   
+            prefix:false,
+            namespaceQualifier: '',                    
+            namespaceURL: 'http://mtest.xudc.com:8080/house',
+            beforeSend: function (SOAPEnvelope){
+                alert("test");
+            },  
+            success: function (soapResponse) {
+                console.log(soapResponse.toJSON());
+                // do stuff with soapResponse
+                // if you want to have the response as JSON use soapResponse.toJSON();
+                // or soapResponse.toString() to get XML string
+                // or soapResponse.toXML() to get XML DOM
+            },
+            error: function (SOAPResponse) {
+                // show error
+            }
+        });    
+    }
+
+    /*
+    * options:{
+    *     url:
+    *     method:
+    *     data://请求数据
+    *     beforeSend:请求前方法
+    *     success:成功回调方法
+    *     error:失败方法
+    *     dataMethod:json,xml。默认为json
+    * }
+    */
+    function soapGetData(options){
+            if(options.dataMethod&&options.dataMethod=="xml"){
+                /*XML交互方式*/
+                $.soap({
+                    url: options.url||'',
+                    method: options.methodName,
+                    data: options.data,
+                    prefix:false,
+                    namespaceQualifier: '',                    
+                    namespaceURL: 'http://mtest.xudc.com:8080/house',
+                    beforeSend: function (SOAPEnvelope){
+                        options.beforeSend&&options.beforeSend();
+                    },  
+                    success: function (soapResponse) {
+                        var _data=soapResponse.toJSON();
+                        options.success&&options.success(_data);
+                    },
+                    error: function (SOAPResponse) {
+                        options.error&&options.error();
+                    }
+                });      
+            }else{
+                $.ajax({
+                    url:options.url||'',
+                    type:options.type,
+                    dataType:'json',
+                    beforeSend:function(){
+                        options.beforeSend&&options.beforeSend();
+                    },
+                    success:function (data) {
+                        options.success&&options.success(data);
+                    },
+                    error:function (SOAPResponse) {
+                        options.error&&options.error();
+                    }
+                });
+            }
+    }
+</script>
+</body>
+</html>
